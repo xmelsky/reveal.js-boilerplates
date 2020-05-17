@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => ({
   entry: {
-    main: './src/ts/index.ts',
+    main: './src/js/index.js',
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -59,8 +59,8 @@ module.exports = (env) => ({
         use: [ 'file-loader' ],
       },
       {
-        test: /\.ts$/,
-        use: 'ts-loader',
+        test: /\.js$/,
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
     ],
@@ -99,7 +99,7 @@ module.exports = (env) => ({
       sass: path.resolve(__dirname, 'src/sass/components/'),
       "reveal-css": path.resolve(__dirname, './node_modules/reveal.js/css/'),
     },
-    extensions: [ '.ts', '.js', '.scss', '.css' ],
+    extensions: ['.js', '.scss', '.css' ],
   },
   output: {
     filename: '[name].bundle.js',

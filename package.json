@@ -15,7 +15,9 @@
     "reveal.js": "^3.9.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
     "autoprefixer": "^9.8.0",
+    "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.1",
     "css-loader": "^3.5.3",
