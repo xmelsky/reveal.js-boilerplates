@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 const CopyPlugin = require('copy-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
@@ -18,6 +17,11 @@ module.exports = (env) => ({
   },
   module: {
     rules: [
+      {
+        test: /\.(html|pug)$/,
+        exclude: /node_modules/,
+        loaders: ['html-loader', 'pug-html-loader'],
+      },
       {
         test: /\.svg$/,
         use: [
@@ -94,12 +98,10 @@ module.exports = (env) => ({
   ],
   resolve: {
     alias: {
-      components: path.resolve(__dirname, 'src/ts/components/'),
-      utils: path.resolve(__dirname, 'src/ts/utils/'),
-      sass: path.resolve(__dirname, 'src/sass/components/'),
-      "reveal-css": path.resolve(__dirname, './node_modules/reveal.js/css/'),
+      sass: path.resolve(__dirname, 'src/sass/'),
+      "slides": path.resolve(__dirname, 'src/slides'),
     },
-    extensions: ['.js', '.scss', '.css' ],
+    extensions: ['.js', '.scss', '.css', '.html' ],
   },
   output: {
     filename: '[name].bundle.js',
