@@ -885,3 +885,5 @@ interface RevealDependency {
 }
 
 declare module 'reveal.js';
+
+declare module '*.pug';
