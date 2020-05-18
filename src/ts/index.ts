@@ -1,11 +1,9 @@
 import Reveal from 'reveal.js';
-import '../sass/main.scss';
-
-import slide1 from 'slides/slide-1.pug';
+import 'sass/main.scss';
 
 document.body.innerHTML = `<div class="reveal">
 <div class="slides">
-    ${slide1}
+    <!--inject:slides-->
     <section>
       <img data-src="images/logo.webp">
     </section>
@@ -13,4 +11,11 @@ document.body.innerHTML = `<div class="reveal">
 </div>
 </div>`;
 
-Reveal.initialize();
+Reveal.initialize({
+  controls: false,
+  touch: true,
+  dependencies: [
+    { src: 'plugin/highlight/highlight.js', async: true },
+    { src: 'plugin/notes/notes.js', async: true },
+  ],
+});

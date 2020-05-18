@@ -47,7 +47,7 @@ module.exports = (env) => ({
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [ autoprefixer() ],
+              plugins: () => [autoprefixer()],
             },
           },
           {
@@ -60,21 +60,46 @@ module.exports = (env) => ({
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [ 'file-loader' ],
+        use: ['file-loader'],
       },
       {
         test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: require.resolve('./src/ts/index.ts'),
+        use: [
+          {
+            loader: 'pug-slides-loader',
+            options: {
+              from: './src/slides',
+            },
+          },
+        ],
+      },
+      {
+        test: require.resolve('reveal.js'),
+        use: {
+          loader: 'expose-loader',
+          options: 'Reveal',
+        },
+      },
     ],
   },
   plugins: [
+
     new CopyPlugin({
-      patterns: [ { from: './src/assets/images', to: 'images' } ],
+      patterns: [
+        { from: './src/assets/images', to: 'images' },
+        { from: './node_modules/reveal.js/plugin/highlight/highlight.js', to: 'plugin/highlight/highlight.js' },
+        { from: './node_modules/reveal.js/plugin/notes/notes.js', to: 'plugin/notes/notes.js' },
+        { from: './node_modules/reveal.js/plugin/notes/notes.html', to: 'plugin/notes/notes.html' },
+
+      ],
     }),
     new HTMLWebpackPlugin({
-      title: "Reveal.js project with Webpack, TypeScript and SASS",
+      title: 'Reveal.js project with Webpack, TypeScript and SASS',
       filename: 'index.html',
       meta: {
         viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
@@ -84,16 +109,16 @@ module.exports = (env) => ({
         removeComments: true,
         collapseWhitespace: true,
       },
-      environment: process.env
+      environment: process.env,
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename:
-        env.production ? '[name].css' :
-        '[name].[hash].css',
+        env.production ? '[name].css'
+          : '[name].[hash].css',
       chunkFilename:
-        env.production ? '[name].css' :
-        '[name].[hash].css',
+        env.production ? '[name].css'
+          : '[name].[hash].css',
     }),
   ],
   resolve: {
@@ -101,7 +126,7 @@ module.exports = (env) => ({
       sass: path.resolve(__dirname, 'src/sass/'),
       slides: path.resolve(__dirname, 'src/slides'),
     },
-    extensions: [ '.ts', '.js', '.scss', '.css' ],
+    extensions: ['.ts', '.js', '.scss', '.css'],
   },
   output: {
     filename: '[name].bundle.js',
