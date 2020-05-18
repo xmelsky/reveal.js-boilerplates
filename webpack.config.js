@@ -67,11 +67,35 @@ module.exports = (env) => ({
         use: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: require.resolve('./src/js/index.js'),
+        use: [
+          {
+            loader: 'pug-slides-loader',
+            options: {
+              from: './src/slides',
+            },
+          },
+        ],
+      },
+      {
+        test: require.resolve('reveal.js'),
+        use: {
+          loader: 'expose-loader',
+          options: 'Reveal',
+        },
+      },
     ],
   },
   plugins: [
     new CopyPlugin({
-      patterns: [ { from: './src/assets/images', to: 'images' } ],
+      patterns: [
+        { from: './src/assets/images', to: 'images' },
+        { from: './node_modules/reveal.js/plugin/highlight/highlight.js', to: 'plugin/highlight/highlight.js' },
+        { from: './node_modules/reveal.js/plugin/notes/notes.js', to: 'plugin/notes/notes.js' },
+        { from: './node_modules/reveal.js/plugin/notes/notes.html', to: 'plugin/notes/notes.html' },
+
+      ],
     }),
     new HTMLWebpackPlugin({
       title: "Reveal.js project with Webpack, TypeScript and SASS",
