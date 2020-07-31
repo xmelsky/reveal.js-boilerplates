@@ -1,5 +1,7 @@
 # Boilerplates for Reveal.js framework
 
+Makes your slides project neat and organized. Keeps each slide markdown in it's own file. Uses webpack and custom loaders to deliver tiny distribution folder
+
 ### Boilerplates to use with [pug-slides-loader](https://www.npmjs.com/package/pug-slides-loader) :
 
 - ### Webpack-Pug-Babel-SASS-Reveal.js [here](https://github.com/xmelsky/reveal.js-boilerplates/tree/reveal.js-pug-babel-sass)
